@@ -1,0 +1,56 @@
+import React, { Component } from 'react'
+
+// React-router-dom link
+import Link from 'react-router-dom/Link';
+
+// React-Bootstrap components
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+
+// Image assets
+import logo from '../../assets/my_artists_logo.png';
+
+/*
+    The navbar navigation at the top of the page.
+    Two different apperances based on whether the user is logged in or not.
+*/
+export class MainNavbar extends Component {
+    render() {
+        return (
+            <div>
+
+                {/* Navbar fixed position top. Uses the dark variant UI to give a dark-mode feel. */}
+                <Navbar collapseOnSelect  bg="dark" variant="dark" fixed="top">
+
+                    {/* Display the logo and the website name. Also a button to redirect to home page. */}
+                    <Link to="/">
+                        <Navbar.Brand href="#home">
+                        <img
+                            alt=""
+                            src={logo}
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                        />{' '}
+                        My Artists
+                        </Navbar.Brand>
+                    </Link>
+
+                    {/* Placeholder: empty on purpose to ensure that the 'login' button is aligned to the right */}
+
+                    <Nav className="mr-auto"></Nav>
+                    
+                    {/* Link on navbar to redirect to the login page*/}
+                    <Nav>
+                        <Navbar.Brand><Link to="/login"> Login </Link></Navbar.Brand>
+                    </Nav>
+                </Navbar>
+            </div>
+        )
+    }
+}
+
+export default MainNavbar
