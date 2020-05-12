@@ -6,8 +6,6 @@ import Link from 'react-router-dom/Link';
 // React-Bootstrap components
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 
 // Image assets
@@ -23,7 +21,7 @@ export class MainNavbar extends Component {
             <div>
 
                 {/* Navbar fixed position top. Uses the dark variant UI to give a dark-mode feel. */}
-                <Navbar collapseOnSelect  bg="dark" variant="dark" fixed="top">
+                <Navbar collapseOnSelect  style={{backgroundColor: '#262a30'}}  variant="dark" fixed="top">
 
                     {/* Display the logo and the website name. Also a button to redirect to home page. */}
                     <Link to="/">
@@ -40,13 +38,21 @@ export class MainNavbar extends Component {
                     </Link>
 
                     {/* Placeholder: empty on purpose to ensure that the 'login' button is aligned to the right */}
-
                     <Nav className="mr-auto"></Nav>
+
+                    {
+                        !this.props.loggedIn ?
+                            <Nav>
+                            {/* Link on navbar to redirect to the login page*/}
+                            <Button variant="outline-success" href="/spotify-login">
+                                Login to Spotify
+                            </Button>
+                            </Nav>
+                        :
+                            <Button variant="success"> {this.props.displayName} </Button>
+                    }
+
                     
-                    {/* Link on navbar to redirect to the login page*/}
-                    <Nav>
-                        <Navbar.Brand><Link to="/login"> Login </Link></Navbar.Brand>
-                    </Nav>
                 </Navbar>
             </div>
         )

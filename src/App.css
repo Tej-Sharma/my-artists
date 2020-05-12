@@ -1,26 +1,18 @@
-
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 
-  .App-logo {
-    animation: App-logo-spin infinite 21s linear;
-  }
+.App-logo {
+  animation: App-logo-spin infinite 21s linear;
+}
 
-
+/* Get a gradient background and white text for a nice touch */
 .App-header {
-  background-color: #282c34;
+  background-image: linear-gradient(#2f343d, #000000);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -37,3 +29,4 @@
     transform: rotate(360deg);
   }
 }
+

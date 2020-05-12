@@ -11,21 +11,30 @@ import Button from 'react-bootstrap/Button';
 // Style sheet for the login page
 import LoginStyle from './LoginStyle.css';
 
+// Other components
+import DisplayError from "../../../utility/DisplayError";
 
-/* 
-    The login page. Handles authentication and redirection of the user to home page with authentication.
-*/
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+
+/**
+ *     The login page. Handles authentication and redirection of the user to home page with authentication.
+ */
 export class LoginPage extends Component {
 
     /*
         Sets up the desired state fields needed for login: 2 properties
     */
-   constructor(props) {
+    constructor(props) {
         super(props);
 
         this.state = {
             emailInput: '',
             passwordInput: '',
+            showError: false, // show login error
+            errors: [],  // store the error(s)
+            loggingIn: false, // control loading
         }
 
         // Bind functions with this one-time to ensure that they have access to the classes properties
@@ -34,30 +43,51 @@ export class LoginPage extends Component {
         this.handleLogin = this.handleLogin.bind(this);
     }
 
-    /*
-        Handle the submission of the login form. If successful authentication, redirect the user.
-        Otherwise, display an error message.
-        As mentioned below, validations are handled within the UI through 'required
+    /**
+    *   Handle the submission of the login form. If successful authentication, redirect the user.
+    *    Otherwise, display an error message.
+    *    As mentioned below, validations are handled within the UI through 'required
+    * @param {*} event - reference to the form
     */
     handleLogin(event) {
-
+        // Prevent unwanted html behaviour
+        event.preventDefault();
+        // set to be loading and reset errors
+        this.setState({loggingIn: true, showError: false, errors: []});
+        
+        firebase.auth().signInWithEmailAndPassword(this.state.emailInput, this.state.passwordInput)
+        .then(result => {
+            // Successful login -> redirect to home page
+            this.props.history.push('/');
+        }).catch(error => {
+            // Login error -> add it to state for it to be displayed
+            this.setState({
+                loggingIn: false, 
+                showError: true, 
+                errors: this.state.errors.concat(error.message)
+            })
+        });
     }
 
-    /*
-        Update the stored state's properties.
-        @event - The reference to the UI component.
+    /** 
+     * Update the stored state's properties
+     * @event - The reference to the UI component.
                 The name property of the UI component will correspond to a property in the state
                 i.e., for the signup email field, the name is 'newEmail'
     */
     handleUIChange(event) {
         // Retrieve the name and the value from the UI field and update the state accordingly with it
-        this.setState({[event.target.name]: event.target.value});
+        // Close error box as well
+        this.setState({[event.target.name]: event.target.value, showError: false});
     }
 
     render() {
         return (
             <div>
                 
+                 {/* To display error on invalid login. Pass the relevant props to facilitate it */ }
+                 <DisplayError  showError={this.state.showError} errors={this.state.errors} />
+
                 {/* 
                     Form container. Contains the login fields: email and password. 
                     On submit, call the handleLogin function.
@@ -83,8 +113,8 @@ export class LoginPage extends Component {
                     </Form.Group>
 
                     {/* Button that handles the submission of the form through type="submit" */}
-                    <Button variant="primary" type="submit">
-                        Login
+                    <Button variant="primary" type="submit" disabled={this.state.loggingIn}>
+                        {this.state.loggingIn ? 'One sec...' : 'Login'}
                     </Button>
                     <br />
                     
