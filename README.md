@@ -1,20 +1,18 @@
 # My Artists
 
 Responsive web app that allows you to search for all of the albums of your favorite artist
-and even listen to all of the tracks in that album.
-
-In addition, it stores your album history using a backend server, so you can take it with you.
+and even listen to all of the tracks in that album. In addition, it stores your album history using a backend server, so you can take it with you.
 
 ## Tech used
 
-ReactJS,
-Bootstrap (React-Bootstrap library),
-Backend for Auth-Server (Node / Express / CORS),
-Axios (frontend HTTP requests to backend),
-Spotify Web API,
-Spotify Web Playback SDK
-Firebase Backend (with Firestore NoSQL database)
-React Router DOM (multi page app)
+* ReactJS,
+* Bootstrap (React-Bootstrap library),
+* Backend for Auth-Server (Node / Express / CORS),
+* Axios (frontend HTTP requests to backend),
+* Spotify Web API,
+* Spotify Web Playback SDK
+* Firebase Backend (with Firestore NoSQL database)
+* React Router DOM (multi page app)
 
 ## Backend code
 
@@ -22,6 +20,8 @@ This app uses the authorization code flow for the Spotify Web API in order to au
 
 The backend code for the app is located in /auth-server/authorization_code/app.js
 
+
+# React Scripts Refrence Below
 
 ## Available Scripts
 
