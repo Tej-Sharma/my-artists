@@ -1,4 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My Artists
+
+Responsive web app that allows you to search for all of the albums of your favorite artist
+and even listen to all of the tracks in that album.
+
+In addition, it stores your album history using a backend server, so you can take it with you.
+
+## Tech used
+
+ReactJS,
+Bootstrap (React-Bootstrap library),
+Backend for Auth-Server (Node / Express / CORS),
+Axios (frontend HTTP requests to backend),
+Spotify Web API,
+Spotify Web Playback SDK
+Firebase Backend (with Firestore NoSQL database)
+React Router DOM (multi page app)
+
+## Backend code
+
+This app uses the authorization code flow for the Spotify Web API in order to authenticate the user (this is mandatory to communicate with the Spotify API).
+
+The backend code for the app is located in /auth-server/authorization_code/app.js
+
 
 ## Available Scripts
 

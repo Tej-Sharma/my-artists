@@ -84,7 +84,7 @@ class AccountHistoryPage extends Component {
     
     render() {
         return (
-            <div style={{'padding': '10px'}}>
+            <div style={{'padding': '5px'}}>
                 <h2> Check out your account history </h2>
                 <hr style={{borderColor: 'inherit'}}></hr>
                 <br />
