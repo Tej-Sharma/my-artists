@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 
-// React-router-dom link
-import Link from 'react-router-dom/Link';
-
 // React-Bootstrap components
 import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 
 // Import only the required firebase backend services
@@ -17,6 +13,8 @@ import "firebase/firestore";
 import DisplayError from "../../../utility/DisplayError";
 
 /**
+ *  NOTE: NOT USED by the web app, but, for future extensibility and demonstration of how 
+ *  to sign up and create a user through the Firebase backend, it has been included here
  *  The signup page. Handles creating a new account, then loggin in the  user, and redirecting to the main page.
  */
 export class SignupPage extends Component {

@@ -2,32 +2,34 @@
     padding: 15px
 }
 
+.trackName {
+  float: left;
+}
+.trackDuration {
+  float: right;
+}
+
+p {
+  font-size: 0.8em;
+}
+
+/* On mobile devices, overflow can cause problems, so this needs to be handled */
 .trackItem {
     width: 100%;
-    height: 1.5em;
     background-color: #393a3b;
     transition-duration: 1.5s;
     transition-timing-function: ease-in-out;
     margin: 7px auto;
     font-size: 0.8em;
-}
-
-p {
-    font-size: 0.8em;
-}
-
-.trackDuration {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: right;
-}
+    overflow-x: auto;
+  }
 
 .trackItem:hover {
     background-color: #5da174;
     animation: glowAndClose 1.5s ease-in-out infinite alternate;
 }
 
-/* Just a fun little CSS animation */
+/* Just a fun little CSS animation for the track items */
 @keyframes glowAndClose {
     0% {
       color: #0b6fb3;

@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 
 // React-Bootstrap components
-import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
-import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
+import axios from 'axios'
+
+// Styling and a fun animation for the track results
 import './ViewAlbumPage.css'
+
+// Add the Firebase products that you want to use
+var firebase = require("firebase/app");
+require("firebase/firestore");
 
 // Import Spotify from the Web API Wrapper for JS
 var SpotifyAPI = require('spotify-web-api-js');
@@ -29,56 +32,85 @@ export class ViewAlbumPage extends Component {
          // Set up the Spotify API
          this.spotifyApi = new SpotifyAPI();
          this.spotifyApi.setAccessToken(this.state.aToken); 
+
+         // Firebase DB access for history
+         this.db = firebase.firestore();
+
          
          // Bind functions
          this.getArtists = this.getArtists.bind(this);
          this.getTracks = this.getTracks.bind(this);
-
+         this.playTrack = this.playTrack.bind(this);
+         this.addToHistory = this.addToHistory.bind(this);
     }
 
     componentDidMount() {
         // Check if logged in
         let loginTime = window.localStorage.getItem('loginTime');
-
-        if(loginTime == null || 
-            loginTime === 'expired' || 
+        let aToken = window.localStorage.getItem('aToken');
+        
+        if(loginTime == null || loginTime === 'expired' || 
             new Date().getTime() - loginTime >= 3600 * 1000) {
                 this.setState({loggedIn: false})
         } else {
             // Logged in, load the album
             this.setState({loggedIn: true})
 
-            // Retrieve all of the album's details
+            // Retrieve all of the album's details and store it in the component's state
             this.spotifyApi.getAlbum(this.props.match.params.id)
             .then(data => {
                 this.setState({albumData: data});
+
+                // Now, get the user's display name. This needs to be retrieved in order
+                // to access the DB to save the user's album history. Use a HTTP GET request.
+                let headers = { headers: { 'Authorization': 'Bearer ' + aToken } }
+                axios.get('https://api.spotify.com/v1/me', headers)
+                .then(res => {
+                    this.addToHistory(res.data.display_name, data);
+                }).catch((error) => {
+                    console.log(error);
+                })
             }).catch(err => console.log(err));
+
         }
     }
 
     /**
-     * Convert the array of artists returned from the API into a string
+     * Using the Firebase backend DB, add this album to the user's viewed history
      */
-    getArtists() {
-        var artistsStr = [];
-        this.state.albumData.artists.forEach(artist => {artistsStr.push(artist.name)})
-        return artistsStr.join();
+    addToHistory(displayName, albumData) {
+        this.db.collection("user_history").doc(displayName)
+        .collection("viewed_albums").doc().set({
+            albumData
+        }).catch(err => console.log (err));
     }
 
-    playTrack() {
-        console.log("PLAYING IT!");
+    /**
+     * Simple one line Convert the array of artists returned from the API into a string
+     */
+    getArtists = () => { 
+        return this.state.albumData.artists.map(artist => (artist.name)).join(", ");
+    }
+
+    /**
+     * When an album is clicked, get the current player's device id (the browser)
+     * and then play the track selected by the user
+     */
+    playTrack(trackUri) {
+        this.spotifyApi.play({"uris": [trackUri]}).then(result => {
+            // The track is successfully playing
+            // If further action is needed, it can be taken ehre
+        }).catch(err => console.log("Error playing track ", err));
     }
 
     getTracks() {
-        console.log(this.state.albumData.tracks.items);
+        // Return a list of tracks
+        // Responsive design in the CSS to handle mobile scaling seamlessly
         return this.state.albumData.tracks.items.map(track => (
-            <Container className="trackItem" fluid onClick={this.playTrack} >
-                <Row>
-                    <Col> {track.name} </Col>
-                    <Col md="auto"> {this.convertTrackDuration(track.duration_ms)} </Col>
-                </Row>
-                <p>  </p>
-               <div class="trackDuration">
+            <Container className="trackItem" fluid onClick={this.playTrack.bind(this, track.uri)} >
+                <div className="trackName"> {track.name} </div>
+               <div className="trackDuration">
+               {this.convertTrackDuration(track.duration_ms)}
                </div>
           </Container>
         ));
@@ -102,6 +134,7 @@ export class ViewAlbumPage extends Component {
                     <table style={tableStyle}>
                         <tbody>
                             <tr>
+                                {/* Track header that shows the photo, name, date, and artists */}
                                 <th style={colStyle1}>
                                     <Image src={data.images[0].url} style={imageStyle}/>
                                 </th>
@@ -115,17 +148,23 @@ export class ViewAlbumPage extends Component {
                     </table>
                 </div>
                 <p style={{'color': 'rgba(0, 0, 0, 0)', 'fontSize': '0.5em'}}> placeholder </p>
-                    <this.getTracks />
+               
+                {/* Retrieve the list of tracks. */}
+                <this.getTracks />
 
                 {/* Add breaks to provide space for the footer */}
                 <br /> <br /> 
 
             </div>
             :
-            <div></div>
+            <div>
+                {/* If the user is not logged in, data will be null, so no need to check for 
+                    login */ }
+            </div>
     }
 }
 
+// Some small styles added here to prevent putting too much in the css file
 const headerMain = {
     'position': 'relative'
 }

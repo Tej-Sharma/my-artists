@@ -12,10 +12,10 @@
       content="Find your album artists and the tracks of your favorite artists"
     />
 
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/my_artists_logo.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
-    <!-- Title of the app: My Artists for now-->
+    <!-- Title of the app: My Artists-->
     <title>My Artists</title>
 
     <!-- CDN to React Bootstrap: Used to include the latest styles available dynamically -->
@@ -31,8 +31,13 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+    <!--
+        Retrieve the Spotify Web Playback Player SDK and set the variable
+         window.Spotify so it can be access from our react script 
+        -->
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script>
+      // Set the global Spotify variable
       window.onSpotifyWebPlaybackSDKReady = () => {
         window.Spotify = Spotify;
       }

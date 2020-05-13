@@ -1,4 +1,52 @@
+/* For mobile scaling of the image */
+@media all and (max-width: 500px) {
+  #albumImage {
+    width: 25%;
+    height: 85%;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+  }
+  
+}
+
 #searchItem {
     font-size: calc(10px + 1vmin);
-    color: black;
-  }
+    color: white;
+    background-color: #504f4f8f;
+    width: 65%;
+    margin: 5px auto;
+    position: relative;
+}
+
+/* A smooth little 'shine' animation played on the hover of an album search item */
+#searchItem:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: rgba(255,255,255,0.4);
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+}
+#searchItem:hover:after {
+  width: 120%;
+  background-color: rgba(255,255,255,0);
+  
+	-webkit-transition: all 0.4s ease-in-out;
+	   -moz-transition: all 0.4s ease-in-out;
+	        transition: all 0.4s ease-in-out;
+}
+
+#albumImage {
+  width: 15%;
+  height: 95%;
+  position: absolute;
+  top: 0%;
+  right: 0.5%;
+  margin: 3px 3px 3px 0px;
+}
+

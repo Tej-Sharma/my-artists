@@ -5,11 +5,10 @@ import Link from 'react-router-dom/Link';
 
 // React-Bootstrap components
 import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 
 // Style sheet for the login page
-import LoginStyle from './LoginStyle.css';
+import './LoginStyle.css';
 
 // Other components
 import DisplayError from "../../../utility/DisplayError";
@@ -19,6 +18,9 @@ import "firebase/auth";
 import "firebase/firestore";
 
 /**
+ *     NOTE: NOT USED by the web app, but, for future extensibility and demonstration of how 
+ *     to login through the Firebase backend, it has been included here.
+ *     Login is handled by "HandleLogin.js"
  *     The login page. Handles authentication and redirection of the user to home page with authentication.
  */
 export class LoginPage extends Component {

@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 
 // React-Bootstrap components
 import Pagination from 'react-bootstrap/Pagination';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
+
 
 // Components
 import AlbumSearchItem from '../../utility/AlbumSearchItem';
@@ -38,6 +35,7 @@ class HomePage extends Component {
         // Store the previous HTTP request. When a new one is called, this will be
         this.prev = null;
 
+        // Bind functions to this
         this.searchArtist = this.searchArtist.bind(this);
         this.getSearchResults = this.getSearchResults.bind(this);
         this.handlePagination = this.handlePagination.bind(this);
@@ -45,12 +43,15 @@ class HomePage extends Component {
 
     }
 
+    /**
+     * Check if logged in or not
+     */
     componentDidMount() {
         let loginTime = window.localStorage.getItem('loginTime');
 
-        if(loginTime == null || 
-            loginTime === 'expired' || 
+        if(loginTime == null || loginTime === 'expired' || 
             new Date().getTime() - loginTime >= 3600 * 1000) {
+                // Login expired
                 this.setState({loggedIn: false})
         } else {
             this.setState({loggedIn: true})
@@ -60,17 +61,18 @@ class HomePage extends Component {
 
     /**
      * Called whenever the user edits the search bar and calls a search artits query
-     * to the Spotify Web API
-     * @param {*} event - reference to the search bar
+     * to the Spotify Web API. Dynamically loads in albums on search.
+     * @param {*} event - reference to the search bar to retrieve its search text
      */
     searchArtist(event) {
         let searchText = event.target.value;
         if(searchText === '') {
-            console.log("This was called?");
+            // Empty the search bar when the user deletes all text
             this.setState({searchResults: []});
             return;
         } 
-        // If there's a prev request, abort it
+
+        // If there's a prev request, abort it to prevent duplicate, unneeded HTTP requests
         if (this.prev !== null) {
             this.prev.abort();
         }
@@ -102,28 +104,17 @@ class HomePage extends Component {
     }
 
     // When page 1 is clicked, set the current to page 1 (etc. for each button)
-    handlePagination(event) {
-        if(event.target.id === 'prevPage') {
-            if(this.state.page === 1) return;
-            this.setState({page: (this.state.page-1)})
-        } else if(event.target.id === 'nextPage') {
-            if(this.state.page === 5) return;
-            this.setState({page: (this.state.page+1)}) 
-        } else {
-            this.setState({page: parseInt(event.target.id)});
-        }
-    }
+    handlePagination = (event) => { this.setState({page: parseInt(event.target.id)}); }
 
     /**
-     * When a search item is clicked, this will pass the data onto a page for the album page
+     * When a search item is clicked, this will pass the data onto ViewAlbumPage.js
+     * by redirecting to that website with the albumId in the URL
      * Where the user can view all the tracks of the album and play them
      */
     handleSearchItemClick(albumId) {
         this.props.history.push('/view-album/'+albumId);
     }
     
-
-
     render() {
         return this.state.loggedIn ? 
             <div>
@@ -134,19 +125,20 @@ class HomePage extends Component {
                     name="searchText"
                     onChange={this.searchArtist}
                     className="form-control"
-                    placeholder="Simply search for all the albums of the artist your looking for..."
+                    placeholder="Search albums by artist!"
                     style={searchArtistStyle}
                 />
                 <br />
 
+                {/* Get the search results */}
                 <this.getSearchResults /> 
 
                 <div >
                     {
+                        // If there are no search results, do not show pagination
                         this.state.searchResults.length > 0 ?
+                            // Basic in-line pagination style
                             <Pagination style={{'display': 'flex', 'justifyContent': 'center', 'fontSize': '0.7em'}}>
-                                <Pagination.Prev id="prevPage" 
-                                    onClick={this.handlePagination}/>
                                 <Pagination.Item id="1" 
                                     onClick={this.handlePagination}
                                     active={1===this.state.page}>{1}</Pagination.Item>
@@ -162,22 +154,18 @@ class HomePage extends Component {
                                 <Pagination.Item id="5" 
                                     onClick={this.handlePagination}
                                     active={5===this.state.page}>{5}</Pagination.Item>
-                                <Pagination.Next id="nextPage" 
-                                    onClick={this.handlePagination}/>
                             </Pagination>
                         :
                         <div></div>
                     }
                     <br /> <br />
                 </div>
-
-                
-                   
             </div>
         :
+            // Not logged, show an error to the user
             <DisplayError 
                 showError={true} 
-                errors={['Please login to gain access the site!']}
+                errors={['Please login to gain access to the site!']}
             />
     }
 }

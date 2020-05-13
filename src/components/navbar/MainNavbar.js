@@ -14,12 +14,12 @@ import logo from '../../assets/my_artists_logo.png';
 /*
     The navbar navigation at the top of the page.
     Two different apperances based on whether the user is logged in or not.
+    Will keep this a class component for future extensibility
 */
 export class MainNavbar extends Component {
     render() {
         return (
             <div>
-
                 {/* Navbar fixed position top. Uses the dark variant UI to give a dark-mode feel. */}
                 <Navbar collapseOnSelect  style={{backgroundColor: '#262a30'}}  variant="dark" fixed="top">
 
@@ -49,14 +49,14 @@ export class MainNavbar extends Component {
                             </Button>
                             </Nav>
                         :
-                            <Button variant="success"> {this.props.displayName} </Button>
+                            <Link to="/my-history" > <Button variant="success"> {this.props.displayName} </Button>  </Link>
                     }
 
-                    
                 </Navbar>
             </div>
         )
     }
 }
+
 
 export default MainNavbar
