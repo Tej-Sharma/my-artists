@@ -3,7 +3,7 @@
 This code is part of the Spotify Web API. However, in authorization_code, the server setup file
 "app.js" was modified for the app.
 
-Below is the documentation on the code provided here by Web API. Although there are 3 0Auth code flows, the authorization code flow was the most suitable for our purposes.
+Below is the documentation on the code provided here by Web API. Although there are 3 Auth code flows, the authorization code flow was the most suitable for our purposes.
 
 # Spotify Accounts Authentication Examples
 
