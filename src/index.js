@@ -4,8 +4,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import * as firebase from "firebase/app";
-
+import * as firebase from 'firebase/app';
 
 // Firebase backend - core app must be imported to initialize app with firebase
 // Register firebase backend to the remote servers
@@ -14,14 +13,14 @@ import * as firebase from "firebase/app";
 // IMPORTANT Note: the IDs below have been asteriked because this is private data
 // and should not be shared on a public GitHub repository
 const firebaseConfig = {
-  apiKey: "AIzaSyBraqgKxrrqLBkk6Jf4Y8b_H-47AoJjCKY",
-  authDomain: "softie-pals.firebaseapp.com",
-  databaseURL: "https://softie-pals.firebaseio.com",
-  projectId: "softie-pals",
-  storageBucket: "softie-pals.appspot.com",
-  messagingSenderId: "2015829189",
-  appId: "1:2015829189:web:178dfbed2c1c0c7453e4ac",
-  measurementId: "G-WL8J92DEXV"
+  apiKey: "AIzaSyA67weoRnKUtJR7GHzwOhSNy1Dkd-eusKo",
+  authDomain: "my-artists.firebaseapp.com",
+  databaseURL: "https://my-artists.firebaseio.com",
+  projectId: "my-artists",
+  storageBucket: "my-artists.appspot.com",
+  messagingSenderId: "1086897329238",
+  appId: "1:1086897329238:web:6890d0723120ed1f4c97f7",
+  measurementId: "G-GX5TC5YS8B"
 };
 
 // Initialize the app using the config
@@ -35,4 +34,3 @@ ReactDOM.render(
 );
 
 serviceWorker.unregister();
-

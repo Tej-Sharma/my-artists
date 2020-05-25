@@ -1,5 +1,5 @@
 .mainContent {
-    padding: 15px
+  padding: 15px;
 }
 
 .trackName {
@@ -15,39 +15,38 @@ p {
 
 /* On mobile devices, overflow can cause problems, so this needs to be handled */
 .trackItem {
-    width: 100%;
-    background-color: #393a3b;
-    transition-duration: 1.5s;
-    transition-timing-function: ease-in-out;
-    margin: 7px auto;
-    font-size: 0.8em;
-    overflow-x: auto;
-  }
+  width: 100%;
+  background-color: #393a3b;
+  transition-duration: 1.5s;
+  transition-timing-function: ease-in-out;
+  margin: 7px auto;
+  font-size: 0.8em;
+  overflow-x: auto;
+}
 
 .trackItem:hover {
-    background-color: #5da174;
-    animation: glowAndClose 1.5s ease-in-out infinite alternate;
+  background-color: #5da174;
+  animation: glowAndClose 1.5s ease-in-out infinite alternate;
 }
 
 /* Just a fun little CSS animation for the track items */
 @keyframes glowAndClose {
-    0% {
-      color: #0b6fb3;
-      text-shadow: none;
-    }
-    100% {
-      color: #4eaceb;
-      text-shadow: 0 0 0.6rem #4eaceb, 0 0 1.5rem #2e709c,
-        -0.2rem 0.1rem 1rem #0578c4, 0.2rem 0.1rem 1rem #0578c4,
-        0 -0.5rem 2rem #0d2d42, 0 0.5rem 3rem #0d2d42;
-    }
+  0% {
+    color: #0b6fb3;
+    text-shadow: none;
   }
+  100% {
+    color: #4eaceb;
+    text-shadow: 0 0 0.6rem #4eaceb, 0 0 1.5rem #2e709c, -0.2rem 0.1rem 1rem #0578c4,
+      0.2rem 0.1rem 1rem #0578c4, 0 -0.5rem 2rem #0d2d42, 0 0.5rem 3rem #0d2d42;
+  }
+}
 
-  @keyframes glow {
-    from {
-      text-shadow: 0 0 20px #2d9da9;
-    }
-    to {
-      text-shadow: 0 0 30px #34b3c1, 0 0 10px #4dbbc7;
-    }
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px #2d9da9;
+  }
+  to {
+    text-shadow: 0 0 30px #34b3c1, 0 0 10px #4dbbc7;
+  }
 }

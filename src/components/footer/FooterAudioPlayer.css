@@ -1,20 +1,20 @@
 .audioFooter {
-    position: fixed;
-    right: 0.5%;
-    bottom: 0.5%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  position: fixed;
+  right: 0.5%;
+  bottom: 0.5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #playButton {
-    width: 2.5em;
-    height: 2.5em;
-    cursor:pointer;
-    border:none;
-    margin: 4px auto;   
+  width: 2.5em;
+  height: 2.5em;
+  cursor: pointer;
+  border: none;
+  margin: 4px auto;
 }
 
 #playButton:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }

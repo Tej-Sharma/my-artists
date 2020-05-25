@@ -5,21 +5,37 @@ and even listen to all of the tracks in that album. In addition, it stores your 
 
 ## Tech used
 
-* ReactJS,
-* Bootstrap (React-Bootstrap library),
-* Backend for Auth-Server (Node / Express / CORS),
-* Axios (frontend HTTP requests to backend),
-* Spotify Web API,
-* Spotify Web Playback SDK
-* Firebase Backend (with Firestore NoSQL database)
-* React Router DOM (multi page app)
+- ReactJS,
+- Bootstrap (React-Bootstrap library),
+- Backend for Auth-Server (Node / Express / CORS),
+- Axios (frontend HTTP requests to backend),
+- Spotify Web API,
+- Spotify Web Playback SDK
+- Firebase Backend (with Firestore NoSQL database)
+- React Router DOM (multi page app)
+
+## Running the app
+
+Starting at the root directory, please first 'npm install' all the required modules for both the front-end and the back-end:
+
+$ npm install
+    $ cd auth-server
+\$ npm install
+
+Then, the app can be run through starting the back-end and the front-end process
+
+    $ cd auth-server/authorization_code
+    $ node app.js
+
+Then, in another terminal, in the root directory of "my-artists":
+
+    $ npm start
 
 ## Backend code
 
 This app uses the authorization code flow for the Spotify Web API in order to authenticate the user (this is mandatory to communicate with the Spotify API).
 
 The backend code for the app is located in /auth-server/authorization_code/app.js
-
 
 # React Scripts Refrence Below
 
