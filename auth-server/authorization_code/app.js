@@ -10,8 +10,11 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
 // The app's credentials to allow a user to login and return a token
-var client_id = '8710bfff5bf047ee9744c590fa4fbb33';
-var client_secret = '1480a6d7cbbf496a92ccd617e81f8aea';
+// NOTE: You must generate your own id's from the Spotify Developer website
+var client_id = '************';
+var client_secret = ''************';';
+
+// When the auth is done, this URL will be redirected to
 var redirect_uri = 'http://localhost:8888/callback';
 
 /**
