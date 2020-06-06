@@ -21,7 +21,9 @@ and even listen to all of the tracks in that album. In addition, it stores your 
 
 ## Running the app
 
-Note: to access the user-history section, you must init and create your own Firebase credentials in 'src/index.js'
+**Note: to access the user-history section, you must init and create your own Firebase credentials in 'src/index.js' and generate your Spotify API ids from the Spotify Developer website**
+
+With that done, it's all pretty simple:
 Starting at the root directory, please first 'npm install' all the required modules for both the front-end and the back-end:
 
 $ npm install
