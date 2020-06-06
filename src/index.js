@@ -10,17 +10,18 @@ import * as firebase from 'firebase/app';
 // Register firebase backend to the remote servers
 // Config file of the firebase app (THIS NEEDS TO BE ASTERIKED OUT AS IT IS PRIVATE DATA)
 // (This config file should not be shared with users)
-// IMPORTANT Note: the IDs below have been asteriked because this is private data
+// IMPORTANT Note: the IDs below have been asteriked because this is private data 
 // and should not be shared on a public GitHub repository
+// If you want to create this app, you MUST create your own credentials
 const firebaseConfig = {
-  apiKey: "AIzaSyA67weoRnKUtJR7GHzwOhSNy1Dkd-eusKo",
-  authDomain: "my-artists.firebaseapp.com",
-  databaseURL: "https://my-artists.firebaseio.com",
-  projectId: "my-artists",
-  storageBucket: "my-artists.appspot.com",
-  messagingSenderId: "1086897329238",
-  appId: "1:1086897329238:web:6890d0723120ed1f4c97f7",
-  measurementId: "G-GX5TC5YS8B"
+  apiKey: "***********",
+  authDomain: "***********",
+  databaseURL: "***********",
+  projectId: "***********",
+  storageBucket: "***********",
+  messagingSenderId: "***********",
+  appId: "***********",
+  measurementId: "***********"
 };
 
 // Initialize the app using the config
